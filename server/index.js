@@ -16,9 +16,7 @@ app.use(cors({
     origin: [process.env.ORIGIN], // Your client URL
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
-})
-);
-
+}));
 
 // Middleware
 app.use(cookieParser());

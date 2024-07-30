@@ -1,8 +1,9 @@
 import Background from "@/assets/Welcome.mp4";
 import Emoji from "@/assets/duck.png";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsList } from "../../components/ui/tabs";
+import { TabsContent , TabsTrigger } from "@radix-ui/react-tabs";
 import { useState } from "react";
 import { toast } from "sonner";
 import { apiClient } from "@/lib/api-client";

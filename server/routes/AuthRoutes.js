@@ -10,3 +10,4 @@ authRoutes.post("/login" , login);
 authRoutes.get("/user-info" ,verifyToken, getUserInfo);
 
 export default authRoutes;
+
