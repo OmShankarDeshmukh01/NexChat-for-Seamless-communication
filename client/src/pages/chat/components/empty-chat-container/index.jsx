@@ -14,4 +14,4 @@ const EmptyChatContainer = () => {
         </div>
     );
 };
-export default EmptyChatContainer;
+export default EmptyChatContainer;  

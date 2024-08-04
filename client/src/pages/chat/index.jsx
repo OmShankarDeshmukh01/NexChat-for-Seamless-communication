@@ -25,4 +25,4 @@ const Chat = () => {
         </div>
     );
 };
-export default Chat;
+export default Chat;        
