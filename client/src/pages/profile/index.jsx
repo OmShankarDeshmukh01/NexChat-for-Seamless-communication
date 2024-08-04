@@ -1,5 +1,5 @@
 import { useAppStore } from "@/store";
-import { useEffect,useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -30,8 +30,8 @@ const Profile = () => {
             setLastName(userInfo.lastName);
             setSelectedColor(userInfo.color); // Initialize color from user info
         }
-        if(userInfo.image){
-            setImage(`${HOST}/${userInfo.image}`)
+        if (userInfo.image) {
+            setImage(`${HOST}/${userInfo.image}`);
         }
     }, [userInfo]);
 
@@ -76,40 +76,40 @@ const Profile = () => {
         }
     };
 
-    const handleFileInputClick = ()=>{
+    const handleFileInputClick = () => {
         fileInputRef.current.click();
     };
 
-    const handleImageChange = async (event) =>{
+    const handleImageChange = async (event) => {
         const file = event.target.files[0];
         console.log({ file });
-        if(file){
+        if (file) {
             const formData = new FormData();
-            formData.append("profile-image" , file);
-            const response = await apiClient.post(ADD_PROFILE_IMAGE_ROUTE , formData ,{withCredentials:true});
-            if(response.status === 200 && response.data.image){
-                setUserInfo({...userInfo , image: response.data.image});
+            formData.append("profile-image", file);
+            const response = await apiClient.post(ADD_PROFILE_IMAGE_ROUTE, formData, { withCredentials: true });
+            if (response.status === 200 && response.data.image) {
+                setUserInfo({ ...userInfo, image: response.data.image });
                 toast.success("Image updated successfully!");
             }
         }
     };
 
-    const handleDeleteImage = async()=>{
-        try{
-            const response = await apiClient.delete(REMOVE_PROFILE_IMAGE_ROUTE ,{withCredentials:true});
+    const handleDeleteImage = async () => {
+        try {
+            const response = await apiClient.delete(REMOVE_PROFILE_IMAGE_ROUTE, { withCredentials: true });
 
-            if(response.status === 200){
-                setUserInfo({...userInfo ,image:null });
-                toast.success("image removed successfully !");
+            if (response.status === 200) {
+                setUserInfo({ ...userInfo, image: null });
+                toast.success("Image removed successfully!");
                 setImage(null);
             }
-        }catch(error){
+        } catch (error) {
             console.log(error);
         }
     };
 
     return (
-        <div className="bg-[#E3F2FF] h-[100vh] w-[100vw] flex items-center justify-center">
+        <div className="bg-[#1c1d25] h-[100vh] w-[100vw] flex items-center justify-center">
             <div className="h-[80vh] border-2 border-white text-opacity-90 shadow-2xl w-[80vw] md:w-[90vw] lg:w-[70vw] xl:w-[60vw] rounded-3xl flex flex-col items-center justify-center relative" style={{ backgroundImage: `url(${profileBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
                 <div className="absolute top-5 left-5">
                     <div
@@ -144,7 +144,7 @@ const Profile = () => {
                                     )}
                                 </div>
                             )}
-                            <input type="file" ref={fileInputRef} className="hidden" onChange={handleImageChange} name="profile-image" accept=".png,.jpg, .jpeg, .svg, .webp"/>
+                            <input type="file" ref={fileInputRef} className="hidden" onChange={handleImageChange} name="profile-image" accept=".png,.jpg, .jpeg, .svg, .webp" />
                         </div>
                         <div className="flex gap-5 mt-5">
                             {colors.map((color, index) => (
@@ -163,7 +163,7 @@ const Profile = () => {
                     </div>
                 </div>
                 <Button
-                    className="rounded-full p-6 bg-[#6a7bbd] transition-all duration-300 hover:bg-[#4c64a6] active:scale-95 mt-5  shadow-[#4c64a6] active:shadow-none"
+                    className="rounded-full p-6 bg-[#6a7bbd] transition-all duration-300 hover:bg-[#4c64a6] active:scale-95 mt-5 shadow-[#4c64a6] active:shadow-none"
                     onClick={saveChanges}
                 >
                     Save Changes

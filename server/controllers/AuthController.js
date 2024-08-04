@@ -3,7 +3,7 @@ import { compare } from 'bcrypt';
 import jwt from "jsonwebtoken";
 import {renameSync , unlinkSync} from "fs";
 
-const maxAge = 3 * 24 * 60 * 60*1000; // Token expiration in seconds
+const maxAge = 365 * 24 * 60 * 60*1000; // Token expiration in seconds
 
 const createToken = (email, userId) => {
     return jwt.sign({ email, userId }, process.env.JWT_KEY, { expiresIn: maxAge });

@@ -7,11 +7,11 @@ const EmptyChatContainer = () => {
             <Lottie isClickToPauseDisabled={true} height={200} width={200} options={animationDefaultOptions} />
             <div className="text-opacity-80 text-white flex flex-col gap-5 items-center mt-10 lg:text-4xl text-3xl transition-all duration-300 text-center">
                 <h3 className="josefin-sans">
-                    Hi <span className="text-purple-500">!</span> Welcome to
-                    <span className="text-purple-500"> NexChat</span> App
+                    Hi <span style={{ color: '#6a7bbd' }}>!</span> Welcome to
+                    <span style={{ color: '#6a7bbd' }}> NexChat</span> App
                 </h3>
             </div>
         </div>
     );
 };
-export default EmptyChatContainer;  
+export default EmptyChatContainer;

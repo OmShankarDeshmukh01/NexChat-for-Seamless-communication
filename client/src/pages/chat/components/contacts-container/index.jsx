@@ -1,6 +1,7 @@
 import ProfileInfo from "./components/profile-info";
 import logo from "/public/vite.png";
 import logoText from "/public/NexChat-removebg.png";
+import NewDm from "./components/new-dm";
 
 const ContactsContainer = () => {
     return (
@@ -11,6 +12,7 @@ const ContactsContainer = () => {
             <div className="my-5">
                 <div className="flex items-center justify-between pr-10">
                     <Title text="Direct Messages" />
+                    <NewDm/>
                 </div>
             </div>
             <div className="my-5">
@@ -27,7 +29,7 @@ export default ContactsContainer;
 
 const Logo = () => {
     return (
-        <div className="flex p-8 justify-start items-center gap-4">
+        <div className="flex p-5 mt-0 justify-start items-center gap-4">
             <img src={logoText} alt="NexChat Logo Text" width="300" height="20" /> {/* Adjust the width and height as needed */}
         </div>
     );

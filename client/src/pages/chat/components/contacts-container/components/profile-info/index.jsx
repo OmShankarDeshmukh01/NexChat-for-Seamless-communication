@@ -29,7 +29,7 @@ const ProfileInfo = () => {
         <div className="absolute bottom-0 h-16 flex items-center justify-between px-10 w-full bg-[#2a2b33]">
             <div className="flex gap-3 items-center justify-center">
                 <div className="w-12 h-12 relative">
-                    <Avatar className="h-12 w-12 rounded-full overflow-hidden border-2 border-gray-700 shadow-lg shadow-gray-500/50">
+                    <Avatar className="h-12 w-12 rounded-full overflow-hidden border-2 border-gray-700">
                         {userInfo.image ? (
                             <AvatarImage src={`${HOST}/${userInfo.image}`} alt="profile" className="object-cover w-full h-full bg-black" />
                         ) : (
@@ -57,7 +57,7 @@ const ProfileInfo = () => {
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger>
-                            <IoPowerSharp className="text-red-500 text-xl font-medium" onClick={logOut} />
+                            <IoPowerSharp className="text-red-700 text-xl font-medium" onClick={logOut} />
                         </TooltipTrigger>
                         <TooltipContent className="bg-[#1c1b1e] border-none text-white">
                             <p>Logout</p>
