@@ -22,22 +22,35 @@ const setupSocket = (server) => {
         }
     };
 
-    const sendMessage =async(message)=>{
+    const sendMessage = async (message) => {
+        if (message.messageType === "text" && !message.content) {
+            console.error("Content is required for text messages");
+            return;
+        }
+        if (message.messageType === "file" && !message.fileUrl) {
+            console.error("File URL is required for file messages");
+            return;
+        }
+
         const senderSocketId = userSocketMap.get(message.sender);
         const recipientSocketId = userSocketMap.get(message.recipient);
 
-        const createdMessage = await Message.create(message);
-        const messageData = await Message.findById(createdMessage._id)
-        .populate("sender" , "id email firstName lastName image color")
-        .populate("recipient" , "id email firstName lastName image color");
+        try {
+            const createdMessage = await Message.create(message);
+            const messageData = await Message.findById(createdMessage._id)
+                .populate("sender", "id email firstName lastName image color")
+                .populate("recipient", "id email firstName lastName image color");
 
-        if(recipientSocketId){
-            io.to(recipientSocketId).emit("recieve Message" ,messageData);
+            if (recipientSocketId) {
+                io.to(recipientSocketId).emit("receiveMessage", messageData);
+            }
+            if (senderSocketId) {
+                io.to(senderSocketId).emit("receiveMessage", messageData);
+            }
+        } catch (error) {
+            console.error("Error sending message:", error);
         }
-        if(senderSocketId){
-            io.to(senderSocketId).emit("recieve Message" ,messageData);
-        }
-    }
+    };
 
     io.on("connection", (socket) => {
         const userId = socket.handshake.query.userId;
@@ -49,7 +62,7 @@ const setupSocket = (server) => {
             console.log("User ID not provided during connection.");
         }
 
-        socket.on("sendMessage",sendMessage);
+        socket.on("sendMessage", sendMessage);
         socket.on("disconnect", () => disconnect(socket));
     });
 };
