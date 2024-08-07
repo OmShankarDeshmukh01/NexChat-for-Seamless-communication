@@ -52,6 +52,11 @@ Install the dependencies:
 npm install
 ```
 
+Create a .env file:
+```bash
+VITE_SERVER_URL=""
+```
+
 Run client Interface:
 ```bash
 npm run dev
@@ -72,10 +77,9 @@ npm install
 Create a .env file:
 ```bash
 PORT=
-MONGO_URI=
-JWT_SECRET=
-TWILIO_ACCOUNT_SID=
-TWILIO_AUTH_TOKEN=
+JWT_KEY=""
+ORIGIN=""
+DATABASE_URL=""
 ```
 
 4. Run Server:
