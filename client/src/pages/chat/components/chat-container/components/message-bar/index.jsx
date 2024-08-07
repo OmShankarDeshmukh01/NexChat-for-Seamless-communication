@@ -9,7 +9,7 @@ import { IoSend } from "react-icons/io5";
 import { RiEmojiStickerLine } from "react-icons/ri";
 
 const MessageBar = () => {
-    const { selectedChatType, selectedChatData, userInfo } = useAppStore();
+    const { selectedChatType, selectedChatData, userInfo, setIsUploading, setFileUploadProgress } = useAppStore();
     const socket = useSocket();
     const emojiRef = useRef(null);
     const fileInputRef = useRef();
@@ -41,8 +41,17 @@ const MessageBar = () => {
                 messageType: "text",
                 fileUrl: undefined,
             });
-            setMessage(""); // Clear the input field after sending the message
+            
+        } else if(selectedChatType === "channel"){
+            socket.emit("send-channel-message" ,{
+                sender: userInfo.id,
+                content: message,
+                messageType: "text",
+                fileUrl: undefined,
+                channelId : selectedChatData._id,
+            });
         }
+        setMessage(""); // Clear the input field after sending the message
     };
 
     const handleAttachmentClick = () => {
@@ -57,15 +66,20 @@ const MessageBar = () => {
             if (file) {
                 const formData = new FormData();
                 formData.append("file", file);
+                setIsUploading(true);
 
                 const response = await apiClient.post(UPLOAD_FILE_ROUTE, formData, {
                     withCredentials: true,
+                    onUploadProgress:data =>{
+                        setFileUploadProgress(Math.round((100 * data.loaded)/data.total))
+                    },
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
 
                 if (response.status === 200 && response.data) {
+                    setIsUploading(false);
                     if (selectedChatType === "contact") {
                         socket.emit("sendMessage", {
                             sender: userInfo.id,
@@ -74,10 +88,19 @@ const MessageBar = () => {
                             messageType: "file",
                             fileUrl: response.data.filePath,
                         });
+                    } else if(selectedChatType === "channel"){
+                        socket.emit("send-channel-message" ,{
+                            sender: userInfo.id,
+                            content: undefined,
+                            messageType: "file",
+                            fileUrl: response.data.filePath,
+                            channelId : selectedChatData._id,
+                        });
                     }
                 }
             }
         } catch (error) {
+            setIsUploading(false);
             console.error({error});
         }
     };

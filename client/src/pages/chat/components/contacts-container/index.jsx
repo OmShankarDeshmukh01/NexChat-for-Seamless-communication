@@ -3,12 +3,13 @@ import logoText from "/public/NexChat-removebg.png";
 import NewDm from "./components/new-dm";
 import { useEffect } from "react";
 import { apiClient } from "@/lib/api-client";
-import { GET_DM_CONTACTS_ROUTES } from "@/utils/constants";
+import { GET_DM_CONTACTS_ROUTES, GET_USER_CHANNELS_ROUTE } from "@/utils/constants";
 import { useAppStore } from "@/store";
 import ContactList from "@/components/contact-list";
+import CreateChannel from "./components/create-channel";
 
 const ContactsContainer = () => {
-    const { setDirectMessagesContacts, directMessagesContacts } = useAppStore();
+    const { setDirectMessagesContacts, directMessagesContacts , channels ,setChannels } = useAppStore();
 
     useEffect(() => {
         const getContacts = async () => {
@@ -21,9 +22,21 @@ const ContactsContainer = () => {
                 console.error("Failed to fetch contacts:", error);
             }
         };
+        const getChannels = async () => {
+            try {
+                const response = await apiClient.get(GET_USER_CHANNELS_ROUTE, { withCredentials: true });
+                if (response.data.channels) {
+                    setChannels(response.data.channels);
+                }
+            } catch (error) {
+                console.error("Failed to fetch contacts:", error);
+            }
+        };
+        
 
         getContacts();
-    }, [setDirectMessagesContacts]);
+        getChannels();
+    }, [setDirectMessagesContacts , setChannels]);
 
     return (
         <div className="relative w-full sm:w-[35vw] lg:w-[30vw] xl:w-[20vw] bg-[#0e0e10] border-r-2 border-[#2f303b]">
@@ -35,11 +48,17 @@ const ContactsContainer = () => {
                     <Title text="Direct Messages" />
                     <NewDm />
                 </div>
+                <div className="max-h-[38vh] overflow-y-auto scrollbar-hidden">
                 <ContactList contacts={directMessagesContacts} />
+                </div>
             </div>
             <div className="my-5">
                 <div className="flex items-center justify-between pr-10">
                     <Title text="Channels" />
+                    <CreateChannel/>
+                </div>
+                <div className="max-h-[38vh] overflow-y-auto scrollbar-hidden">
+                <ContactList contacts={channels} isChannel={true}/>
                 </div>
             </div>
             <ProfileInfo />
@@ -59,6 +78,8 @@ const Logo = () => {
 
 const Title = ({ text }) => {
     return (
-        <h6 className="uppercase tracking-widest text-[#6a7bbd] pl-10 font-light text-opacity-90 text-sm">{text}</h6>
+        <h6 className="uppercase tracking-widest text-[#6a7bbd] pl-10 font-light text-opacity-90 text-sm">
+            {text}
+        </h6>
     );
 };
