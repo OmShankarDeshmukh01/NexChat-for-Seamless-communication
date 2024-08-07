@@ -2,7 +2,7 @@
 
 # NexChat
 
-Stockwise is a cutting-edge web application designed for efficient inventory management through advanced demand forecasting techniques. This project addresses the critical challenges organizations face in predicting demand, managing stock levels, and ensuring customer satisfaction.
+NexChat is an innovative chat application built on the MERN stack, designed to provide seamless real-time communication. Utilizing Socket.IO, NexChat ensures instant message delivery, allowing users to engage in dynamic conversations without delay. The app supports not only text messages but also the sharing of files and images, making it versatile for various communication needs. Additionally, NexChat features the ability to create channels, which can include multiple members, fostering collaborative environments for teams and communities. This robust functionality is all wrapped in a user-friendly interface, making NexChat an ideal solution for modern, real-time communication.
 
 ## Table of Contents
 
@@ -17,27 +17,28 @@ Stockwise is a cutting-edge web application designed for efficient inventory man
 
 ## Overview
 
-- Stockwise helps businesses manage their inventory by predicting future demand and ensuring they have the right stock levels. This application provides tools for tracking products, managing companies, and viewing real-time inventory data.
-
+- NexChat is a cutting-edge chat application built with the MERN stack, featuring real-time messaging powered by Socket.IO. It allows users to send text messages, files, and images instantly. Users can create channels to include multiple members, making it ideal for both team collaboration and community interactions. NexChat offers a user-friendly interface and robust functionality for seamless communication.
+- 
 ## Features
 
-- Demand Forecasting- Predict future product demand based on historical data.
-- Inventory Tracking- Monitor stock levels, sales, and inventory health.
-- Real Time Ordering Predicted Items - Collaborate with wholesalers in real-time to streamline procurement processes with one click .
+- Live Chat - Chats are send and recieved in real time without delay.
+- Channels - Create Groups and send messages to everyone in one click.
+- Files and Image - Send heavy Files and Images with no quality loss and download them in realtime.
 
 ## Dependencies
 
 - Express
-- Git
+- Mongo
 - Github
+- Socket.io
 
 ## Git-Setup
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/shaurya35/Stockwise-Inventory-Manager
-cd Stockwise-Inventory-Manager
+git clone https://github.com/OmShankarDeshmukh01/NexChat.git
+cd NexChat
 ```
 ## Client Setup
 
@@ -92,8 +93,6 @@ Access the app in your web browser at `http://localhost:5173/`.
 
 ## Contributors
 
-- Shaurya ([LinkedIn](https://www.linkedin.com/in/shaurya--jha/))
 - Om Shankar Deshmukh ([LinkedIn](https://www.linkedin.com/in/om-shankar-deshmukh-7431b9245/))
-- Satyam Kumar ([LinkedIn](https://www.linkedin.com/in/satyamkumar1018/))
 
 
