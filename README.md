@@ -4,6 +4,8 @@
 
 NexChat is an innovative chat application built on the MERN stack, designed to provide seamless real-time communication. Utilizing Socket.IO, NexChat ensures instant message delivery, allowing users to engage in dynamic conversations without delay. The app supports not only text messages but also the sharing of files and images, making it versatile for various communication needs. Additionally, NexChat features the ability to create channels, which can include multiple members, fostering collaborative environments for teams and communities. This robust functionality is all wrapped in a user-friendly interface, making NexChat an ideal solution for modern, real-time communication.
 
+![Example Image](server/views/cover1.png)
+
 ## Table of Contents
 
 - [Overview](#Overview)
@@ -24,6 +26,8 @@ NexChat is an innovative chat application built on the MERN stack, designed to p
 - Live Chat - Chats are send and recieved in real time without delay.
 - Channels - Create Groups and send messages to everyone in one click.
 - Files and Image - Send heavy Files and Images with no quality loss and download them in realtime.
+
+  ![Example Image](server/views/cover2.png)
 
 ## Dependencies
 
