@@ -1,5 +1,21 @@
+import dotenv from 'dotenv';
+
+dotenv.config(); 
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
@@ -15,13 +31,8 @@ const app = express();
 const port = process.env.PORT || 3001;
 const databaseURL = process.env.DATABASE_URL;
 
-// CORS configuration
-app.use(cors({
-    origin: [process.env.ORIGIN], // Your client URL
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    credentials: true,
-}));
 
+app.use(cors(corsOptions));
 app.use("/uploads/profiles" , express.static("uploads/profiles"));
 app.use("/uploads/files" , express.static("uploads/files"));
 
